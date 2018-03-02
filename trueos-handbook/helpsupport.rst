@@ -375,8 +375,8 @@ in the system tray and received the same messages as noted above.
 
 **Second Attempt:**
 
-I was working with and want to give special thanks to :ref:`Gitter Chat`
-users *@RodMyers* and *@NorwegianRockCat*. They suggested I use the
+I was working with and want to give special thanks to users
+*@RodMyers* and *@NorwegianRockCat*. They suggested I use the
 :command:`lpreserver` command line. So I issued these commands:
 
 .. code-block:: none
@@ -455,6 +455,75 @@ If sound issues persist, consider asking the :ref:`TrueOS Community` for
 help or :ref:`Report a Bug`. When reporting an issue, be sure to include
 both the version of |trueos| and name of the sound card.
 
+.. index:: upgrade from PCBSD
+.. _Upgrading from PCBSD 10.x to TrueOS:
+
+Upgrading from |pcbsd| 10.x to |trueos|
+=======================================
+
+.. warning:: If any user account uses PersonaCrypt, please be sure to
+   save any encryption keys to a safe place (e.g. a thumb drive) before
+   beginning the upgrade process. Loss of encryption keys may result in
+   being unable to import the home directory after the upgrade is
+   complete.
+
+If the system is using |pcbsd| 10.x, the option to update to |trueos|
+does not appear in the Control Panel version of Update Manager. This is
+because a new installation is required in order to migrate to |trueos|.
+However, the |trueos| installer allows the user to keep all their
+existing data and home directories as it provides the ability to
+install |trueos| into a new boot environment. In other words, the new
+operating system and updated applications are installed while the ZFS
+pool and any existing boot environments are preserved. Since the new
+install is in a boot environment, the option to boot back into the
+previous |pcbsd| installation remains.
+
+.. note:: This option overwrites the contents of :file:`/etc`. If any
+   custom configurations exist, save them to a backup or the home
+   directory first. Alternately, use the |sysadm|
+   :sysclbk:`Boot Environment Manager <boot-environment-manager>`
+   post-installation to mount the previous |pcbsd| boot environment to
+   copy over any configuration files which may not have been backed up.
+
+To perform the installation to a new boot environment, start the
+|trueos| installation as described earlier in the chapter. In the
+:ref:`System Selection` screen, choose to install either a desktop or
+a server. Press :guilabel:`Next` to view the :guilabel:`Disk Selection`
+screen, shown in :numref:`Figure %s <upgrade1>`.
+
+.. _upgrade1:
+
+.. figure:: images/upgrade1b.png
+   :scale: 100%
+
+   Disk Selection
+
+|trueos| automatically detects if the drive has an existing boot
+environment and fills in the data as necessary. If no boot environments
+are detected, :guilabel:`Install into Boot Environment` is invisible.
+To upgrade, select :guilabel:`Install into Boot Environment` and
+choose which existing pool to install into from the drop-down menu. In
+the :ref:`Disk Selection Screen <upgrade1>`, the user is installing into
+the existing **tank** pool. Press :guilabel:`Next` when ready.
+
+.. warning:: Be sure :guilabel:`Install into Boot Environment` is
+   checked before proceeding, or data can be lost.
+
+A pop-up will appear and ask to start the default Full-Disk
+installation. Click :guilabel:`Yes` to begin the installation.
+
+When the installation is complete, reboot the system and remove the
+installation media. The post-installation screens run as described in
+the :ref:`Booting Into TrueOS <Booting Into TrueOS>` section to help configure the new
+installation.
+
+.. warning:: During the :ref:`Create a User` process, recreate the
+   primary user account using the same user name and user id (UID) from
+   the previous |pcbsd| system. This allows |trueos| to associate the
+   existing home directory with that user. Once logged in, use the
+   |sysadm| :sysclbk:`User Manager <user-manager>` to recreate any other
+   user accounts or to reassociate any PersonaCrypt accounts.
+
 .. index:: trueos community
 .. _TrueOS Community:
 
@@ -466,32 +535,27 @@ inception. A wide variety of chat channels and forum options are now
 available for users to interact with each other, contributors to the
 project, and the core development team.
 
-.. index:: gitter chat
-.. _Gitter Chat:
+.. index:: Telegram Community
+.. _Telegram Community:
 
-Gitter Chat
------------
+Telegram Community
+------------------
 
-The |trueos| Project uses
-`Gitter <https://en.wikipedia.org/wiki/Gitter>`_ to provide real-time
-chat and collaboration with |trueos| users and developers. Gitter does
-not require an application to use, but does require a login using
-either an existing GitHub or Twitter account.
+The |trueos| Project uses `Telegram <https://telegram.org/>`_ to provide
+real-time chat and collaboration with |trueos| users and developers.
+Telegram is available in a web browser or as downloadable applications
+for Android, macOS, and PC/Mac/Linux.
 
-To access the TrueOS Gitter community, point a web browser to
-https://gitter.im/trueos.
+To access the TrueOS Telegram community, point a web browser to
+https://web.telegram.org. Sign in with a valid phone number and join
+the
+`TrueOS Community channel <https://web.telegram.org/#/im?p=@TrueOSCommunity>`_.
 
-Gitter also maintains a full archive of the chat history. This means
-lengthy conversations about hardware issues or workarounds are always
-available for reference. To access the Gitter archive, navigate to
-the desired |trueos| room's archive. For example, here is the address of
-the TrueOS Lobby archive: https://gitter.im/trueos/Lobby/archives.
+Telegram maintains a full archive of the chat history. This means lengthy
+conversations about hardware issues or workarounds are always available
+for reference.
 
-.. note:: It is not required to log in to Gitter to browse the archive.
-
-Gitter is a great way to chat with other users and get answers to
-questions. Here are few things to keep in mind when asking a question
-on the Gitter channel:
+Here are some tips about the community channel:
 
 * Most of the regular users are always logged in, even when they are
   away from their computer or are busy doing other things. If no one
@@ -601,7 +665,7 @@ join.
 
 * `TrueOS® Facebook Group <https://www.facebook.com/groups/4210443834/>`_
 
-* `TrueOS® LinkedIn Group <http://www.linkedin.com/groups?gid=1942544>`_
+* `TrueOS® LinkedIn Group <https://www.linkedin.com/start/join?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fgroups%2F1942544&trk=login_reg_redirect>`_
 
 .. index:: contributing to TrueOS
 .. _Get Involved:
@@ -779,11 +843,11 @@ Having as many people as possible using |trueos| on many different
 hardware configurations assists the Project in finding and fixing bugs.
 The end result is more polished and usable OS for the entire community.
 
-If you wish to become a tester, join the Gitter
-`TrueOS® Lobby <https://gitter.im/trueos/Lobby>`_. Updates are typically
-announced announced here. You can also see any problems other testers
-are finding and can check to see if the problem exists on your hardware
-as well.
+If you wish to become a tester, join the Telegram
+`TrueOS Community channel <https://web.telegram.org/#/im?p=@TrueOSCommunity>`_.
+Updates are typically announced announced here. You can also see any
+problems other testers are finding and can check to see if the problem
+exists on your hardware as well.
 
 Anyone can become a beta tester. If you find a bug while testing, be
 sure to accurately describe the situation when
@@ -809,11 +873,11 @@ This section describes each of these translation areas in more detail
 and how to begin as a translator.
 
 Regardless of the type of desired translation, you should first join the
-`TrueOS® Lobby <https://gitter.im/trueos/Lobby>`_. The first time
-joining the channel, introduce yourself and indicate which language(s)
-and which type(s) of translations you can assist with. This allows you
-to meet other volunteers and stay informed of any notices or updates
-affecting translators.
+`TrueOS Community channel <https://web.telegram.org/#/im?p=@TrueOSCommunity>`_.
+The first time joining the channel, introduce yourself and indicate
+which language(s) and which type(s) of translations you can assist with.
+This allows you to meet other volunteers and stay informed of any
+notices or updates affecting translators.
 
 .. index:: interface translation
 .. _Interface Translation:
@@ -869,7 +933,7 @@ translate. Once any selections are made, click :guilabel:`Save`.
 
 .. note:: If the language you wish to translate is missing from the
    "Translated languages" menu, request its addition in the
-   `TrueOS® Lobby <https://gitter.im/trueos/Lobby>`_.
+   `TrueOS Community channel <https://web.telegram.org/#/im?p=@TrueOSCommunity>`_.
 
 Next, click :guilabel:`Projects` at the top of the screen to select
 a localization project. In the example shown in
@@ -915,7 +979,8 @@ to translate.
    Translation Editor
 
 If assistance is needed with either a translation or the Weblate system,
-ask for help in the `TrueOS® Lobby <https://gitter.im/trueos/Lobby>`_.
+ask for help in the
+`TrueOS Community channel <https://web.telegram.org/#/im?p=@TrueOSCommunity>`_.
 
 .. index:: documentation translation
 .. _Documentation Translation:
@@ -1014,8 +1079,9 @@ Website Translation
 ^^^^^^^^^^^^^^^^^^^
 
 If you are interested in translating the |trueos| website, introduce
-yourself in the `TrueOS® Lobby <https://gitter.im/trueos/Lobby>`_ or
-open a new topic in our
+yourself in the
+`TrueOS Community channel <https://web.telegram.org/#/im?p=@TrueOSCommunity>`_
+or open a new topic in our
 `Discourse forum <https://discourse.trueos.org/>`_
 
 Currently, the website is being translated into several languages,
@@ -1117,7 +1183,7 @@ the |sysadm| :sysclbk:`AppCafe <appcafe>`. The
 `QtCreator <http://wiki.qt.io/Category:Tools::QtCreator>`_ application
 is a full-featured IDE designed to help new Qt users get up and running
 faster while boosting the productivity of experienced Qt developers.
-`Qt Designer <http://doc.qt.io/qt-4.8/designer-manual.html>`_ is lighter
+`Qt Designer <http://doc.qt.io/archives/qt-4.8/designer-manual.html>`_ is lighter
 weight as it is only a :file:`.ui` file editor and does not provide any
 other IDE functionality.
 
@@ -1843,7 +1909,7 @@ from the forums or mailing lists, try searching these websites:
 
 * `Slashdot BSD <https://bsd.slashdot.org/>`_
 
-* `DistroWatch <http://distrowatch.com/>`_
+* `DistroWatch <https://distrowatch.com/>`_
 
 * `LinuxBSDos <http://linuxbsdos.com/>`_
 
@@ -1873,7 +1939,7 @@ Many BSD sites and resources may also contain useful information:
 
 * `The Best of FreeBSD Basics <http://reedmedia.net/books/freebsd-basics/>`_ (book)
 
-* `Definitive Guide to PC-BSD® <http://www.apress.com/us/book/9781430226413>`_ (book)
+* `Definitive Guide to PC-BSD® <https://www.apress.com/us/book/9781430226413>`_ (book)
 
 **ZFS Resources**
 
@@ -1883,7 +1949,7 @@ Many BSD sites and resources may also contain useful information:
 
 * `ZFS Best Practices Guide <https://documents.irf.se/get_document.php?group=Computer&docid=311>`_
 
-* `ZFS Administration Guide <http://docs.oracle.com/cd/E19253-01/819-5461/index.html>`_
+* `ZFS Administration Guide <https://docs.oracle.com/cd/E19253-01/819-5461/index.html>`_
 
 * `Becoming a ZFS Ninja (video) <https://blogs.oracle.com/video/becoming-a-zfs-ninja>`_
 

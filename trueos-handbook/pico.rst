@@ -126,7 +126,7 @@ Set the *compression* setting to any number from 1 to 9. The default
 setting is recommended as turning up the compression can introduce
 performance issues on the |picl|.
 
-Pico uses *Virtual GL* (vgl) for graphics hardware acceleration. VGL
+Pico uses *Virtual GL* (VGL) for graphics hardware acceleration. VGL
 works with any *OpenGL* supported graphics card, but Nvidia cards are
 generally recommended at this time.
 
@@ -242,10 +242,10 @@ VirtualGL (VGL) is the toolkit used by the |trpi| to provide 3D hardware
 acceleration to the |picl|. VGL redirects OpenGL commands and data to
 the GPU in the |pise|, then pulls back the rendered 3D images to the
 client. For further information about this open-source project, please
-refer to the `VirtualGL website <virtualgl.org>`_
+refer to the `VirtualGL website <https://virtualgl.org>`_
 
 VirtualGL also has an extensive
-`user guide <http://www.virtualgl.org/Documentation/Documentation>`_ to
+`user guide <https://www.virtualgl.org/Documentation/Documentation>`_ to
 help guide new users through the various features of this useful
 toolkit.
 
